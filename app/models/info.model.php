@@ -11,7 +11,7 @@ class infoModel {
     /**
      * Devuelve la lista de tareas completa.
      */
-    public function getAllpesca() {
+    public function getAll() {
         // 1. abro conexión a la DB
         // ya esta abierta por el constructor de la clase
 
@@ -24,29 +24,7 @@ class infoModel {
         
         return $pesca;
     }  
-    public function getAlllocalidades() {
-        // 1. abro conexión a la DB
-        // ya esta abierta por el constructor de la clase
-
-        // 2. ejecuto la sentencia (2 subpasos)
-        $query = $this->db->prepare("SELECT * FROM localidades");
-        $query->execute();
-
-        // 3. obtengo los resultados
-        $localidad = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
-        
-        return $localidad;
-    }  
- 
-    public function getAllinfopesca(){
-      
-        $query = $this->db->prepare("SELECT info_pesca.*,localidades.localidad  as localidad FROM info_pesca JOIN localidades ON info_pesca.id_localidad_fk = localidades.id_localidad");           
-        $query->execute();
-         $info=$query->fetchAll(PDO::FETCH_OBJ);
-    return $info;
-        }
-    
-    /**
+  /**
      * Inserta info pesca en la base de datos.
      */
     public function insertinfopesca($embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk) {

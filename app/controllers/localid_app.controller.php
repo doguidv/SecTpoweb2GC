@@ -9,7 +9,7 @@ class TaskApiController {
     private $data;
 
     public function __construct() {
-        $this->model = new TaskModel();
+        $this->model = new localidModel();
         $this->view = new ApiView();
         
         // lee el body del request

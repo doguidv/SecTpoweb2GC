@@ -1,7 +1,6 @@
 <?php
 require_once './libs/Router.php';
 require_once './app/controllers/infop_app.controller.php';
-
 require_once './app/controllers/localid_app.controller.php';
 // crea el router
 $router = new Router();

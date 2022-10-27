@@ -9,7 +9,7 @@ class TaskApiController {
     private $data;
 
     public function __construct() {
-        $this->model = new TaskModel();
+        $this->model = new infoModel();
         $this->view = new ApiView();
         
         // lee el body del request
@@ -20,43 +20,42 @@ class TaskApiController {
         return json_decode($this->data);
     }
 
-    public function getTasks($params = null) {
-        $tasks = $this->model->getAll();
-        $this->view->response($tasks);
+    public function getinfops($params = null) {
+        $infops = $this->model->getAll();
+        $this->view->response($infops);
     }
 
-    public function getTask($params = null) {
+    public function getinfop($params = null) {
         // obtengo el id del arreglo de params
         $id = $params[':ID'];
-        $task = $this->model->get($id);
+        $infop = $this->model->get($id);
 
         // si no existe devuelvo 404
-        if ($task)
-            $this->view->response($task);
+        if ($infop)
+            $this->view->response($infop);
         else 
             $this->view->response("La info con el id=$id no existe", 404);
     }
 
-    public function deleteTask($params = null) {
+    public function deleteinfop($params = null) {
         $id = $params[':ID'];
 
-        $task = $this->model->get($id);
-        if ($task) {
-            $this->model->delete($id);
-            $this->view->response($task);
+        $infop = $this->model->get($id);
+        if ($infop) {
+            $this->model->deleteinfoById($id);
+            $this->view->response($infop);
         } else 
             $this->view->response("La info con el id=$id no existe", 404);
     }
 
-    public function insertTask($params = null) {
-        $task = $this->getData();
-
-        if (empty($task->titulo) || empty($task->descripcion) || empty($task->prioridad)) {
+    public function insertinfop($params = null) {
+        $infop = $this->getData();
+        if (empty($infop->embarcacion) || empty($infop->tipo_embarcado) || empty($infop->equipo_pesca)  ||    empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca)   || empty($infop->id_localidad_fk) ) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($task->titulo, $task->descripcion, $task->prioridad);
-            $task = $this->model->get($id);
-            $this->view->response($task, 201);
+            $id = $this->model->insert($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_pesca,$infop->id_localidad_fk);
+            $infop = $this->model->get($id);
+            $this->view->response($infop, 201);
         }
     }
 
