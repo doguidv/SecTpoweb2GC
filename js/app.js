@@ -1,10 +1,8 @@
 "use strict"
+const URL = "api/SecTpoweb2GCiPOLLETTI/";
+let infopes = [];
 
-const URL = "api/tasks/";
-
-let tasks = [];
-
-let form = document.querySelector('#task-form');
+let form = document.querySelector('#infop-form');
 form.addEventListener('submit', insertTask);
 
 
@@ -33,9 +31,14 @@ async function insertTask(e) {
     
     let data = new FormData(form);
     let task = {
-        titulo: data.get('titulo'),
-        descripcion: data.get('descripcion'),
-        prioridad: data.get('prioridad'),
+        embarcado: data.get('embarcado'),
+        tipo_embarcacion: data.get('tipo_embarcacion'),
+        equipo_pesca: data.get('equipo_pesca'),
+        carnada: data.get('carnada'),
+        pesca: data.get('pesca'),
+        Detalles_Pesca: data.get('Detalles_Pesca'),
+        id_localidad_fk: data.get('id_localidad_fk'),
+  
     };
 
     try {
@@ -78,20 +81,15 @@ async function deleteTask(e) {
 }
 
 function showTasks() {
-    let ul = document.querySelector("#task-list");
+    let ul = document.querySelector("#infop-list");
     ul.innerHTML = "";
-    for (const task of tasks) {
+    for (const infopes of infop) {
 
         let html = `
-            <li class='
-                    list-group-item d-flex justify-content-between align-items-center
-                    ${ task.finalizada == 1 ? 'finalizada' : ''}
-                '>
-                <span> <b>${task.titulo}</b> - ${task.descripcion} (prioridad ${task.prioridad}) </span>
+            <li class=''>
+                <span> <b>${infop.tipo_embarcacion}</b> - ${infop.equipo_pesca} (prioridad ${infop.carnada}) </span>
                 <div class="ml-auto">
-                    ${task.finalizada != 1 ? `<a href='#' data-task="${task.id}" type='button' class='btn btn-success btn-finalize'>Finalizar</a>` : ''}
-                    <a href='#' data-task="${task.id}" type='button' class='btn btn-danger btn-delete'>Borrar</a>
-                </div>
+                     </div>
             </li>
         `;
 

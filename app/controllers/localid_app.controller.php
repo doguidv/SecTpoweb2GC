@@ -21,7 +21,7 @@ class TaskApiController {
     }
 
     public function getlocalids($params = null) {
-        $tasks = $this->model->getAll();
+        $tasks = $this->model->getAlllocalid();
         $this->view->response($tasks);
     }
 
