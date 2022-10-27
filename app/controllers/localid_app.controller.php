@@ -20,12 +20,12 @@ class TaskApiController {
         return json_decode($this->data);
     }
 
-    public function getTasks($params = null) {
+    public function getlocalids($params = null) {
         $tasks = $this->model->getAll();
         $this->view->response($tasks);
     }
 
-    public function getTask($params = null) {
+    public function getlocalid($params = null) {
         // obtengo el id del arreglo de params
         $id = $params[':ID'];
         $task = $this->model->get($id);
@@ -37,7 +37,7 @@ class TaskApiController {
             $this->view->response("La localidad con el id=$id no existe", 404);
     }
 
-    public function deleteTask($params = null) {
+    public function deletelocalid($params = null) {
         $id = $params[':ID'];
 
         $task = $this->model->get($id);
@@ -48,15 +48,15 @@ class TaskApiController {
             $this->view->response("La localidad con el id=$id no existe", 404);
     }
 
-    public function insertTask($params = null) {
-        $task = $this->getData();
+    public function insertlocalid($params = null) {
+        $localid = $this->getData();
 
-        if (empty($task->titulo) || empty($task->descripcion) || empty($task->prioridad)) {
+        if (empty($localid->localidad)) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($task->titulo, $task->descripcion, $task->prioridad);
-            $task = $this->model->get($id);
-            $this->view->response($task, 201);
+            $id = $this->model->insert($localid->localidad);
+            $localid = $this->model->get($id);
+            $this->view->response($localid, 201);
         }
     }
 

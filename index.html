@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <title>TUDAI - CSR TodoList</title>
+    <title>informacion de la pesca</title>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="">TUDAI CSR TodoList</a>
+              <a class="navbar-brand" href="">Informacion de la pesca</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -23,6 +23,21 @@
                     <a class="nav-link" aria-current="page" href="">Home</a>
                   </li>
                  </ul>
+                 <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="info_pesca.html">ABM info pesca</a>
+                    </li>
+                   </ul>
+                   <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="Categoria.html">ABM de Categorias</a>
+                    </li>
+                   </ul>
+                   <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href=""></a>
+                    </li>
+                   </ul>
               </div>
             </div>
           </nav>
@@ -30,38 +45,6 @@
 
     <!-- inicio main container -->
     <main class="container">
-
-        <!-- formulario de alta de tarea -->
-        <form id="task-form" action="add" method="POST" class="my-4">
-            <div class="row">
-                <div class="col-9">
-                    <div class="form-group">
-                        <label>Título</label>
-                        <input name="titulo" type="text" class="form-control">
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="form-group">
-                        <label>Prioridad</label>
-                        <select name="prioridad" class="form-control">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Descripcion</label>
-                <textarea name="descripcion" class="form-control" rows="3"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-        </form>
 
         <!-- lista de tareas -->
         <ul id="task-list" class="list-group">
