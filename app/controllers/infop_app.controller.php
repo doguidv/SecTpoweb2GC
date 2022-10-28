@@ -1,8 +1,8 @@
 <?php
 require_once './app/models/info.model.php';
-require_once './app/views/api.view.php';
+require_once './app/views/app.view.php';
 
-class TaskApiController {
+class InfopApiController {
     private $model;
     private $view;
 
@@ -10,7 +10,7 @@ class TaskApiController {
 
     public function __construct() {
         $this->model = new infoModel();
-        $this->view = new ApiView();
+        $this->view = new AppView();
         
         // lee el body del request
         $this->data = file_get_contents("php://input");
@@ -53,7 +53,7 @@ class TaskApiController {
         if (empty($infop->embarcacion) || empty($infop->tipo_embarcado) || empty($infop->equipo_pesca)  ||    empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca)   || empty($infop->id_localidad_fk) ) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_pesca,$infop->id_localidad_fk);
+            $id = $this->model->insertinfopesca($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_pesca,$infop->id_localidad_fk);
             $infop = $this->model->get($id);
             $this->view->response($infop, 201);
         }

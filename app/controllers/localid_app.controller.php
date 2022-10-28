@@ -1,8 +1,8 @@
 <?php
 require_once './app/models/localid.model.php';
-require_once './app/views/api.view.php';
+require_once './app/views/app.view.php';
 
-class TaskApiController {
+class LocalidApiController {
     private $model;
     private $view;
 
@@ -10,7 +10,7 @@ class TaskApiController {
 
     public function __construct() {
         $this->model = new localidModel();
-        $this->view = new ApiView();
+        $this->view = new AppView();
         
         // lee el body del request
         $this->data = file_get_contents("php://input");
