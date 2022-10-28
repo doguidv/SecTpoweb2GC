@@ -33,11 +33,11 @@ class infoModel {
         // ya esta abierta por el constructor de la clase
 
         // 2. ejecuto la sentencia (2 subpasos)
-        $query = $this->db->prepare("SELECT * FROM info_pesca WHERE id_pesca");
-        $query->execute($id);
+        $query = $this->db->prepare("SELECT * FROM info_pesca WHERE id_pesca=?");
+        $query->execute([$id]);
 
         // 3. obtengo los resultados
-        $pesca = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
+        $pesca = $query->fetch(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
         
         return $pesca;
     }  

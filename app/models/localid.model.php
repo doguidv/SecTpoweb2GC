@@ -22,6 +22,20 @@ class LocalidModel {
         $localid = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos       
         return $localid;
         }
+    /**
+     * Devuelve la lista de localidadpor id.
+     */
+    public function get($id) {
+        // 1. abro conexión a la DB
+        // ya esta abierta por el constructor de la clase
+
+        // 2. ejecuto la sentencia (2 subpasos)
+        $query = $this->db->prepare("SELECT * FROM localidades WHERE id_localidad=?");
+        $query->execute([$id]);
+        // 3. obtengo los resultados
+        $localid = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos       
+        return $localid;
+        }
 
     /**
      * Inserta una localidad en la base de datos.

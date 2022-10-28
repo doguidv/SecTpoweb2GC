@@ -28,11 +28,11 @@ class LocalidApiController {
     public function getlocalid($params = null) {
         // obtengo el id del arreglo de params
         $id = $params[':ID'];
-        $task = $this->model->get($id);
+        $localid = $this->model->get($id);
 
         // si no existe devuelvo 404
-        if ($task)
-            $this->view->response($task);
+        if ($localid)
+            $this->view->response($localid);
         else 
             $this->view->response("La localidad con el id=$id no existe", 404);
     }
