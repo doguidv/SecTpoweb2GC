@@ -9,7 +9,7 @@ class LocalidApiController {
     private $data;
 
     public function __construct() {
-        $this->model = new localidModel();
+        $this->model = new LocalidModel();
         $this->view = new AppView();
         
         // lee el body del request

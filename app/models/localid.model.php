@@ -1,6 +1,6 @@
 <?php
 
-class CategModel {
+class LocalidModel {
 
     private $db;
 
