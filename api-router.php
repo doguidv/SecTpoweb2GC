@@ -6,14 +6,17 @@ require_once './app/controllers/localid_app.controller.php';
 $router = new Router();
 
 // defina la tabla de ruteo
-$router->addRoute('infopesca', 'GET', 'InfopApiController', 'getinfops');
-$router->addRoute('infopesca/:ID', 'GET', 'InfopApiController', 'getinfop');
-$router->addRoute('infopesca/:ID', 'DELETE', 'InfopApiController', 'deleteinfop');
-$router->addRoute('infopesca', 'POST', 'InfopApiController', 'insertinfop'); 
+$router->addRoute('infopescas', 'GET', 'InfopApiController', 'getinfops');
+$router->addRoute('infopescas/:ID', 'GET', 'InfopApiController', 'getinfop');
+$router->addRoute('infopescas/:ID', 'DELETE', 'InfopApiController', 'deleteinfop');
+$router->addRoute('infopescas', 'POST', 'InfopApiController', 'insertinfop'); 
+$router->addRoute('infopescas/:ID', 'PUT', 'InfopApiController', 'updateinfo'); 
+
 
 $router->addRoute('localid', 'GET', 'LocalidApiController', 'getlocalids');
 $router->addRoute('localid/:ID', 'GET', 'LocalidApiController', 'getlocalid');
 $router->addRoute('localid/:ID', 'DELETE', 'LocalidApiController', 'deletelocalid');
 $router->addRoute('localid', 'POST', 'LocalidApiController', 'insertlocalid');
+$router->addRoute('localid/:ID', 'PUT', 'LocalidApiController', 'update'); 
 // ejecuta la ruta (sea cual sea)
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

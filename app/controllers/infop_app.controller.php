@@ -9,7 +9,7 @@ class InfopApiController {
     private $data;
 
     public function __construct() {
-        $this->model = new infoModel();
+        $this->model = new InfoModel();
         $this->view = new AppView();
         
         // lee el body del request
@@ -50,11 +50,22 @@ class InfopApiController {
 
     public function insertinfop($params = null) {
         $infop = $this->getData();
-        if (empty($infop->embarcacion) || empty($infop->tipo_embarcado) || empty($infop->equipo_pesca)  ||    empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca)   || empty($infop->id_localidad_fk) ) {
+        if (empty($infop->embarcado) || empty($infop->tipo_embarcacion) || empty($infop->equipo_pesca)  || empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca) || empty($infop->id_localidad_fk) ) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insertinfopesca($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_pesca,$infop->id_localidad_fk);
+            $id = $this->model->insertinfopesca($infop->embarcado, $infop->tipo_embarcacion, $infop->equipo_pesca,  $infop->carnada,  $infop->pesca,    $infop->Detalles_Pesca, $infop->id_localidad_fk);
             $infop = $this->model->get($id);
+            $this->view->response($infop, 201);
+        }
+    }
+    
+    public function updateinfo($params = null) {
+        $infop = $this->getData();
+        if (empty($infop->embarcacion) || empty($infop->tipo_embarcado) || empty($infop->equipo_pesca)  ||    empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca)   || empty($infop->id_localidad_fk)  || empty($infop->pesca) || empty($infop->id_pesca) ) {
+            $this->view->response("Complete los datos", 400);
+        } else {
+            $id = $this->model->info_pesca($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_Pesca,$infop->id_localidad_fk,$infop->id_pesca);
+            $infop = $this->model->updateinfoById($id);
             $this->view->response($infop, 201);
         }
     }

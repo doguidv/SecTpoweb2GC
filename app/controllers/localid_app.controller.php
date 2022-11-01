@@ -54,10 +54,22 @@ class LocalidApiController {
         if (empty($localid->localidad)) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($localid->localidad);
+            $id = $this->model->insertlocalid($localid->localidad);
             $localid = $this->model->get($id);
             $this->view->response($localid, 201);
         }
     }
+    
+    public function update($params = null) {
+        $localid = $this->getData();
+        if (empty($localid->localidad)||empty($localid->id_localidad)) {
+               $this->view->response("Complete los datos", 400);
+        } else {
+            $id = $this->model->updatelocalid($infop->localidad,$localid->id_localidad);
+            $localid = $this->model->upDatelocalidById($id);
+            $this->view->response($localid, 201);
+        }
+    }
+
 
 }

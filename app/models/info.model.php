@@ -1,6 +1,6 @@
 <?php
 
-class infoModel {
+class InfoModel {
 
     private $db;
 
@@ -44,12 +44,11 @@ class infoModel {
   /**
      * Inserta info pesca en la base de datos.
      */
-    public function insertinfopesca($embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk) {
-        $query = $this->db->prepare("INSERT INTO info_pesca (embarcado, tipo_embarcacion, equipo_pesca,carnada,pesca,Detalles_Pesca,id_localidad_fk) VALUES (?,?, ?, ?, ?,?,?)");
-        $query->execute([$embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk]);
-
+    public function insertinfopesca($embarcado, $tipo_embarcacion, $equipo_pesca,  $carnada,  $pesca,   $Detalles_Pesca,  $id_localidad_fk) {
+        $query = $this->db->prepare("INSERT INTO info_pesca (embarcado, tipo_embarcacion, equipo_pesca, carnada, pesca,   Detalles_Pesca, id_localidad_fk) VALUES (?,?, ?, ?, ?,?,?)");
+        $query->execute([$embarcado, $tipo_embarcacion, $equipo_pesca,  $carnada, $pesca,  $Detalles_Pesca,  $id_localidad_fk]);
         return $this->db->lastInsertId();
-    }
+        }
 /**
      * modifica info pesca dado su id.
      */
@@ -58,20 +57,19 @@ class infoModel {
         $sentencia->execute([$id]);
         $infop= $sentencia->fetch(PDO:: FETCH_OBJ);
         return $infop;
-    
-    }
+        }
     function info_pesca($embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk,$id_pesca) {
         $query=$this->db->prepare('UPDATE info_pesca SET  embarcado = ?, tipo_embarcacion= ?, equipo_pesca= ?, carnada = ?,pesca = ?,Detalles_Pesca=?,id_localidad_fk = ? WHERE id_pesca= ?;');
         $query->execute ([$embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk,$id_pesca]);      
         header("Location: " . BASE_URL.'infopesca'); 
-    }
+        }
     /**
      * Elimina info pesca dado su id.
      */
     function deleteinfoById($id) {
         $query = $this->db->prepare('DELETE FROM info_pesca WHERE id_pesca = ?');
         $query->execute([$id]);
-    }
+        }
 
 }
 

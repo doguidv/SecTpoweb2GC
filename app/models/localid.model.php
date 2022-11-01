@@ -33,7 +33,7 @@ class LocalidModel {
         $query = $this->db->prepare("SELECT * FROM localidades WHERE id_localidad=?");
         $query->execute([$id]);
         // 3. obtengo los resultados
-        $localid = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos       
+        $localid = $query->fetch(PDO::FETCH_OBJ); // devuelve un arreglo de objetos       
         return $localid;
         }
 
@@ -63,7 +63,7 @@ class LocalidModel {
     /**
      * Elimina una localidad dado su id.
      */
-    function deletelocalidById($idlocalid) {
+    function delete($idlocalid) {
         $query = $this->db->prepare('DELETE FROM localidades WHERE id_localidad = ?');
         $query->execute([$idlocalid]);
         }
