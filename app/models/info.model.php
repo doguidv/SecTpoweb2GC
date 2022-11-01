@@ -61,7 +61,6 @@ class InfoModel {
     function info_pesca($embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk,$id_pesca) {
         $query=$this->db->prepare('UPDATE info_pesca SET  embarcado = ?, tipo_embarcacion= ?, equipo_pesca= ?, carnada = ?,pesca = ?,Detalles_Pesca=?,id_localidad_fk = ? WHERE id_pesca= ?;');
         $query->execute ([$embarcado, $tipo_embarcacion, $equipo_pesca,$carnada,$pesca,$Detalles_Pesca,$id_localidad_fk,$id_pesca]);      
-        header("Location: " . BASE_URL.'infopesca'); 
         }
     /**
      * Elimina info pesca dado su id.

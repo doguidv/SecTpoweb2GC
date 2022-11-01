@@ -60,14 +60,15 @@ class InfopApiController {
     }
     
     public function updateinfo($params = null) {
-        $infop = $this->getData();
-        if (empty($infop->embarcacion) || empty($infop->tipo_embarcado) || empty($infop->equipo_pesca)  ||    empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca)   || empty($infop->id_localidad_fk)  || empty($infop->pesca) || empty($infop->id_pesca) ) {
-            $this->view->response("Complete los datos", 400);
-        } else {
-            $id = $this->model->info_pesca($infop->embarcacion, $infop->tipo_embarcado, $infop->equipo_pesca,$infop->carnada,$infop->pesca,$infop->Detalles_Pesca,$infop->id_localidad_fk,$infop->id_pesca);
-            $infop = $this->model->updateinfoById($id);
-            $this->view->response($infop, 201);
+        $infop_id = $params[':ID'];
+        $infop = $this->model->get($infop_id);
+        if ($infop) {
+            $body = $this->getData();
+            $infop = $this->model->info_pesca($body->embarcado, $body->tipo_embarcacion, $body->equipo_pesca, $body->carnada, $body->pesca, $body->Detalles_Pesca, $body->id_localidad_fk, $body->id_pesca);
+            $this->view->response("Localidad con id=$infop_id actualizada con éxito", 200);
         }
+        else 
+            $this->view->response("Localidad con  id=$infop_id not found", 404);
     }
 
 }

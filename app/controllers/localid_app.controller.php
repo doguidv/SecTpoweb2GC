@@ -61,15 +61,14 @@ class LocalidApiController {
     }
     
     public function update($params = null) {
-        $localid = $this->getData();
-        if (empty($localid->localidad)||empty($localid->id_localidad)) {
-               $this->view->response("Complete los datos", 400);
-        } else {
-            $id = $this->model->updatelocalid($infop->localidad,$localid->id_localidad);
-            $localid = $this->model->upDatelocalidById($id);
-            $this->view->response($localid, 201);
+        $localid_id = $params[':ID'];
+        $localid = $this->model->get($localid_id);
+        if ($localid) {
+            $body = $this->getData();
+            $tarea = $this->model->updatelocalid($body->localidad, $body->id_localidad);
+            $this->view->response("Localidad con id=$localid_id actualizada con éxito", 200);
         }
+        else 
+            $this->view->response("Localidad con  id=$localid_id not found", 404);
     }
-
-
 }

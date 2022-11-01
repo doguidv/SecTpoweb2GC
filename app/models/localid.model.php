@@ -58,7 +58,7 @@ class LocalidModel {
     function updatelocalid($localidad,$id_localidad) {
         $query=$this->db->prepare('UPDATE localidades SET  localidad =? WHERE id_localidad =?;');
         $query->execute([$localidad,$id_localidad]);
-         header("Location: " . BASE_URL .'localidad');  
+
         }
     /**
      * Elimina una localidad dado su id.
