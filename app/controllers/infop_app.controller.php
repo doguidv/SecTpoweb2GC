@@ -62,7 +62,7 @@ class InfopApiController {
     public function updateinfo($params = null) {
         $infop_id = $params[':ID'];
         $infop = $this->model->get($infop_id);
-        if ($infop) {
+        if (isset ($infop)) {
             $body = $this->getData();
             $infop = $this->model->info_pesca($body->embarcado, $body->tipo_embarcacion, $body->equipo_pesca, $body->carnada, $body->pesca, $body->Detalles_Pesca, $body->id_localidad_fk, $body->id_pesca);
             $this->view->response("Localidad con id=$infop_id actualizada con éxito", 200);

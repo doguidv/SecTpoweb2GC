@@ -63,7 +63,7 @@ class LocalidApiController {
     public function update($params = null) {
         $localid_id = $params[':ID'];
         $localid = $this->model->get($localid_id);
-        if ($localid) {
+        if (isset($localid)) {
             $body = $this->getData();
             $tarea = $this->model->updatelocalid($body->localidad, $body->id_localidad);
             $this->view->response("Localidad con id=$localid_id actualizada con éxito", 200);
