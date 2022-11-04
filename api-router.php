@@ -11,6 +11,7 @@ $router->addRoute('infopescas/:ID', 'GET', 'InfopApiController', 'getinfop');
 $router->addRoute('infopescas/:ID', 'DELETE', 'InfopApiController', 'deleteinfop');
 $router->addRoute('infopescas', 'POST', 'InfopApiController', 'insertinfop'); 
 $router->addRoute('infopescas/:ID', 'PUT', 'InfopApiController', 'updateinfo'); 
+$router->addRoute('infopescas', 'GET', 'InfopApiController', 'orderinfops'); 
 
 
 $router->addRoute('localid', 'GET', 'LocalidApiController', 'getlocalids');

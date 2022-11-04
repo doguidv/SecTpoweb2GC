@@ -24,30 +24,40 @@ class InfopApiController {
         $infops = $this->model->getAll();
         $this->view->response($infops);
     }
-
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
         $id = $params[':ID'];
         $infop = $this->model->get($id);
 
         // si no existe devuelvo 404
-        if ($infop)
+        if ($infop){
             $this->view->response($infop);
-        else 
+        }else{ 
             $this->view->response("La info con el id=$id no existe", 404);
+        }
+    }
+    public function orderinfops() {
+       
+        // si no existe devuelvo 404
+        if (isset ($_GET['sort'])&& isset ($_GET['order'])){
+        $infop = $this->model->orderby($_GET['sort'],$_GET['order']);
+            $this->view->response($infop);
+        }else {
+            $this->view->response("La info con el id=$id_localidad_fk no existe", 404);
+        }   
     }
 
     public function deleteinfop($params = null) {
         $id = $params[':ID'];
 
         $infop = $this->model->get($id);
-        if ($infop) {
+        if (isset($infop)) {
             $this->model->deleteinfoById($id);
             $this->view->response($infop);
-        } else 
+        } else {
             $this->view->response("La info con el id=$id no existe", 404);
+        }
     }
-
     public function insertinfop($params = null) {
         $infop = $this->getData();
         if (empty($infop->embarcado) || empty($infop->tipo_embarcacion) || empty($infop->equipo_pesca)  || empty($infop->carnada)  || empty($infop->pesca) || empty($infop->Detalles_Pesca) || empty($infop->id_localidad_fk) ) {
