@@ -22,16 +22,19 @@ class InfopApiController {
 
     public function getinfops($params = null) {
 
-        if (!empty ($_GET['sort'])&& !empty ($_GET['order'])){
+        if (!empty ($_GET['sort']) && !empty ($_GET['order'])){
             $sort=$_GET['sort'];
             $order=$_GET['order'];
-            $infop = $this->model->getAll($sort,$order);
-                $this->view->response($infop);
-        }else if  (empty($order)!="asc") {
-            $this->view->response("para ordenar ascendente escribir asc", 404);
-        }else{
+            if($order=="asc"){
+                $infops = $this->model->getAll($sort,$order);
+                $this->view->response($infops);              
+            }  
+            else if ($order!="asc") {
+            $this->view->response("para ordenar ascendente escribir en el endpoint asc", 404);         
+            }else{
             $infops = $this->model->getAll();
             $this->view->response($infops);
+            }
         }          
     }
     public function getinfop($params = null) {
