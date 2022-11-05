@@ -21,11 +21,22 @@ class InfopApiController {
     }
 
     public function getinfops($params = null) {
-        $infops = $this->model->getAll();
-        $this->view->response($infops);
+
+        if (!empty ($_GET['sort'])&& !empty ($_GET['order'])){
+            $sort=$_GET['sort'];
+            $order=$_GET['order'];
+            $infop = $this->model->getAll($sort,$order);
+                $this->view->response($infop);
+        }else if  (empty($order)!="asc") {
+            $this->view->response("para ordenar ascendente escribir asc", 404);
+        }else{
+            $infops = $this->model->getAll();
+            $this->view->response($infops);
+        }          
     }
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
+
         $id = $params[':ID'];
         $infop = $this->model->get($id);
 
@@ -36,16 +47,7 @@ class InfopApiController {
             $this->view->response("La info con el id=$id no existe", 404);
         }
     }
-    public function orderinfops() {
-       
-        // si no existe devuelvo 404
-        if (isset ($_GET['sort'])&& isset ($_GET['order'])){
-        $infop = $this->model->orderby($_GET['sort'],$_GET['order']);
-            $this->view->response($infop);
-        }else {
-            $this->view->response("La info con el id=$id_localidad_fk no existe", 404);
-        }   
-    }
+   
 
     public function deleteinfop($params = null) {
         $id = $params[':ID'];

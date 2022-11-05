@@ -11,20 +11,21 @@ class InfoModel {
     /**
      * Devuelve la lista de tareas completa.
      */
-    public function getAll( ) {
+    public function getAll($Column= null , $order= null ) {
         // 1. abro conexión a la DB
         // ya esta abierta por el constructor de la clase
-
-        // 2. ejecuto la sentencia (2 subpasos)
+        if(isset ($order)){
+        $query = $this->db->prepare("SELECT * FROM info_pesca ORDER BY id_localidad_fk");
+        $query->execute();
+    } else  {
         $query = $this->db->prepare("SELECT * FROM info_pesca WHERE id_pesca");
         $query->execute();
-
+    }        
         // 3. obtengo los resultados
         $pesca = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
-        
         return $pesca;
     }  
-    
+
     /**
      * Devuelve la lista de info pesca segun id.
      */
@@ -42,17 +43,7 @@ class InfoModel {
         return $pesca;
     }  
     
-    public function orderby($sort='id_localidad_fk' , $order='asc') {
-        // 1. abro conexión a la DB
-        // ya esta abierta por el constructor de la clase
-
-        // 2. ejecuto la sentencia (2 subpasos)
-        $query = $this->db->prepare("SELECT * FROM info_pesca ORDER BY id_localidad_fk");
-        $query->execute();
-        // 3. obtengo los resultados
-        $pesca = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos    
-        return $pesca;
-    }  
+   
   /**
      * Inserta info pesca en la base de datos.
      */
