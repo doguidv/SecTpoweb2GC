@@ -13,7 +13,7 @@ class InfoModel {
      */
     public function getAll($Column= null , $order= null, $starAt=null,  $endAt=null) {
 //ordenar
-        if(($Column!=null) && ($order!= null)){
+        if  ($Column && $order){
         $query = $this->db->prepare("SELECT * FROM info_pesca ORDER BY $Column $order");
         $query->execute();
         }

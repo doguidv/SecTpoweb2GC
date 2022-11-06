@@ -23,32 +23,31 @@ class InfopApiController {
     public function getinfops($params = null) {
 
         if (!empty ($_GET['sort']) && !empty($_GET['order'])){
-            $select=$_GET['select']?? '*';
             $sort=$_GET['sort'];
             $order=$_GET['order'];
             //orden asc o desc
             if(($order=="asc")||($order=="desc")){
                 $infops = $this->model->getAll($sort,$order);
-                $this->view->response($infops);              
-            }  
-            else if (($order!="asc")&&($order!="desc")) {
-            $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
-            }
-           //getAll no anda, no se porq 
+                $this->view->response($infops, 200);              
+              
+              }  else if (($order!="asc")&&($order!="desc")) {
+                $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
+                }
+                //getAll no anda, no se porq 
+            }    //Paginacion
             else  {
                 $infops = $this->model->getAll();
-                $this->view->response($infops);
+                $this->view->response($infops, 200);     
             }
-                //Paginacion
+            
             if  (!empty($_GET['starAt'] )  && !empty($_GET['endAt'] )){
                 $starAt=$_GET['starAt'];
                 $endAt=$_GET['endAt'];
                 $infops = $this->model->getAll($starAt,$endAt);
-                $this->view->response($infops);
+                $this->view->response($infops,200);
             }
-            
         }          
-    }
+    
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
 
