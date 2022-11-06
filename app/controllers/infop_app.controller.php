@@ -22,19 +22,31 @@ class InfopApiController {
 
     public function getinfops($params = null) {
 
-        if (!empty ($_GET['sort']) && !empty ($_GET['order'])){
+        if (!empty ($_GET['sort']) && !empty($_GET['order'])){
+            $select=$_GET['select']?? '*';
             $sort=$_GET['sort'];
             $order=$_GET['order'];
-            if($order=="asc"){
+            //orden asc o desc
+            if(($order=="asc")||($order=="desc")){
                 $infops = $this->model->getAll($sort,$order);
                 $this->view->response($infops);              
             }  
-            else if ($order!="asc") {
-            $this->view->response("para ordenar ascendente escribir en el endpoint asc", 404);         
-            }else{
-            $infops = $this->model->getAll();
-            $this->view->response($infops);
+            else if (($order!="asc")&&($order!="desc")) {
+            $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
             }
+           //getAll no anda, no se porq 
+            else  {
+                $infops = $this->model->getAll();
+                $this->view->response($infops);
+            }
+                //Paginacion
+            if  (!empty($_GET['starAt'] )  && !empty($_GET['endAt'] )){
+                $starAt=$_GET['starAt'];
+                $endAt=$_GET['endAt'];
+                $infops = $this->model->getAll($starAt,$endAt);
+                $this->view->response($infops);
+            }
+            
         }          
     }
     public function getinfop($params = null) {
