@@ -11,21 +11,19 @@ class InfoModel {
     /**
      * Devuelve la lista de tareas completa.
      */
-    public function getAll($Column= null , $order= null, $starAt=null,  $endAt=null) {
+    public function getAll($Column=null,$order=null,$starAt=null,$endAt=null) {
 //ordenar
-        if  ($Column && $order){
-        $query = $this->db->prepare("SELECT * FROM info_pesca ORDER BY $Column $order");
-        $query->execute();
-        }
-     //GetALL no funciona    
-        else {
+        if  (($Column)&&($order)){
+        $query = $this->db->prepare("SELECT * FROM info_pesca ORDER BY ? ?");
+        $query->execute([$Column,$order]);
+        }else {
             $query = $this->db->prepare("SELECT * FROM info_pesca ");
             $query->execute();       
         }     
 // Paginado
-        if (($starAt!=null)&& ($endAt!=null)) {
-            $query = $this->db->prepare("SELECT * FROM info_pesca LIMIT $starAt $endAt ");
-            $query->execute();       
+        if (($starAt)&&($endAt)) {
+            $query = $this->db->prepare("SELECT * FROM info_pesca LIMIT ? ? ");
+            $query->execute([$starAt,$endAt]);       
         }    
         $pesca = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
         return $pesca; 

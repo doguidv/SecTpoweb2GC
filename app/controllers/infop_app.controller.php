@@ -26,28 +26,27 @@ class InfopApiController {
             $sort=$_GET['sort'];
             $order=$_GET['order'];
             //orden asc o desc
-            if(($order=="asc")||($order=="desc")){
+            if(($order  ==  "asc")||($order == "desc")){
                 $infops = $this->model->getAll($sort,$order);
-                $this->view->response($infops, 200);              
-              
-              }  else if (($order!="asc")&&($order!="desc")) {
+                $this->view->response($infops, 200);                    
+            }else if (($order!="asc")&&($order!="desc")) {
                 $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
-                }
-                //getAll no anda, no se porq 
-            }    //Paginacion
-            else  {
-                $infops = $this->model->getAll();
-                $this->view->response($infops, 200);     
             }
-            
-            if  (!empty($_GET['starAt'] )  && !empty($_GET['endAt'] )){
-                $starAt=$_GET['starAt'];
-                $endAt=$_GET['endAt'];
+        }
+            else{
+            $infops = $this->model->getAll();
+            $this->view->response($infops, 200);     
+            }    
+        if  (!empty($_GET['starAt'] )  && !empty($_GET['endAt'] )){
+            $starAt=$_GET['starAt'];
+            $endAt=$_GET['endAt'];
+            if   ($starAt>=0){
                 $infops = $this->model->getAll($starAt,$endAt);
                 $this->view->response($infops,200);
-            }
-        }          
-    
+            }        
+        }
+    }
+
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
 
