@@ -29,24 +29,38 @@ class InfopApiController {
             if(($order  ==  "asc")||($order == "desc")){
                 $infops = $this->model->getAll($sort,$order);
                 $this->view->response($infops, 200);                    
-            }else if (($order!="asc")&&($order!="desc")) {
+            }else if (($order!="asc")||($order!="desc")) {
                 $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
             }
         }
             else{
             $infops = $this->model->getAll();
             $this->view->response($infops, 200);     
-            }    
-        if  (!empty($_GET['starAt'] )  && !empty($_GET['endAt'] )){
+            }
+            //Paginacion    
+        if (!empty ($_GET['starAt']) && !empty($_GET['endAt'])){
             $starAt=$_GET['starAt'];
             $endAt=$_GET['endAt'];
-            if   ($starAt>=0){
-                $infops = $this->model->getAll($starAt,$endAt);
-                $this->view->response($infops,200);
-            }        
+            $infops = $this->model->getAll($starAt,$endAt); 
+            var_dump($infopl);
+            if(($starAt!=null)&&($endAt!=null)){
+                $this->view->response($infops, 200);                    
+            }else {
+                $this->view->response("No hay datos para mostrar", 404);         
+                }
         }
+        if (!empty($_GET['equalTo'])){
+            $equalTo=$_GET['equalTo'];
+            $infops = $this->model->getAll($equalTo);
+            if($equalTo){
+                $this->view->response($infops,200);
+            } 
+            else {
+                $this->view->response("No hay datos para mostrar", 404);         
+            }
+        }
+           
     }
-
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
 
