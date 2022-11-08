@@ -5,6 +5,9 @@ http://localhost/SecTpoweb2GCiPOLLETTI/api/infopescas/
 listar 1 item	(GET) (agregar el id_pesca al final)
 http://localhost/SecTpoweb2GCiPOLLETTI/api/infopescas/(id_pesca)
 
+ordenar  items	(GET) (sort= nombre del campo ,al final del endpoint cambiar asc o desc)
+http://localhost/SecTpoweb2GCiPOLLETTI/api/infopescas?sort=id_localidad_fk&order=asc
+
 AGREGAR 1 item	(POST) ()
 http://localhost/SecTpoweb2GCiPOLLETTI/api/infopescas/
 Objet Ejemplo
