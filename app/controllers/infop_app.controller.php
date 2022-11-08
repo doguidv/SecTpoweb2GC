@@ -37,30 +37,8 @@ class InfopApiController {
             $infops = $this->model->getAll();
             $this->view->response($infops, 200);     
             }
-            //Paginacion    
-        if (!empty ($_GET['starAt']) && !empty($_GET['endAt'])){
-            $starAt=$_GET['starAt'];
-            $endAt=$_GET['endAt'];
-            $infops = $this->model->getAll($starAt,$endAt); 
-            var_dump($infopl);
-            if(($starAt!=null)&&($endAt!=null)){
-                $this->view->response($infops, 200);                    
-            }else {
-                $this->view->response("No hay datos para mostrar", 404);         
-                }
-        }
-        if (!empty($_GET['equalTo'])){
-            $equalTo=$_GET['equalTo'];
-            $infops = $this->model->getAll($equalTo);
-            if($equalTo){
-                $this->view->response($infops,200);
-            } 
-            else {
-                $this->view->response("No hay datos para mostrar", 404);         
-            }
-        }
-           
     }
+
     public function getinfop($params = null) {
         // obtengo el id del arreglo de params
 
