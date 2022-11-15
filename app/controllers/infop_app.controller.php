@@ -26,11 +26,12 @@ class InfopApiController {
             $sort=$_GET['sort'];
             $order=$_GET['order'];
             //orden asc o desc
-            if(($order  ==  "asc")||($order == "desc")){
+            $columns=$this->model->getColumns();
+            if((in_array($sort, $columns)) && (($order == "asc") || ($order == "desc"))){
                 $infops = $this->model->getAll($sort,$order);
                 $this->view->response($infops, 200);                    
             }else if (($order!="asc")||($order!="desc")) {
-                $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc", 404);         
+                $this->view->response("para ordenar ascendente o desc escribir al final del endpoint asc o desc o especifique un nombre de columna valido", 404);         
             }
         }
             else{
