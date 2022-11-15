@@ -78,9 +78,9 @@ class InfoModel {
         $query->execute([$id]);
         }
         public function getColumns() {
-                $query = $this->db->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'business' and TABLE_NAME = 'info_pesca' order by ORDINAL_POSITION");//selecciono toda la lista de la tabla clothes
+              /**  $query = $this->db->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'tpoweb2' and TABLE_NAME = 'info_pesca' order by ORDINAL_POSITION");//selecciono toda la lista de la tabla clothes
                $query->execute();                  //envio la consulta        
-               $columns = $query->fetchAll(PDO::FETCH_ASSOC); // devuelve un arreglo de objetos
+               $columns = $query->fetchAll(PDO::FETCH_ASSOC); // devuelve un arreglo de objetos */
               $columns= array ( "*", "id_pesca", "embarcado", "tipo_embarcacion","equipo_pesca","carnada","pesca","Detalle_Pesca","id_localidad_fk");
                return $columns;  //reenvia el arreglo al controlador
             
